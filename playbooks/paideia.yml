@@ -1,0 +1,12 @@
+- name: Install and run paideia-api services
+  hosts: paideia
+  remote_user: "{{ ssh_user }}"
+
+- name: paideia data repo
+  ansible.builtin.import_playbook: paideia-data/paideia-data.yml
+
+- name: paideia api repo
+  ansible.builtin.import_playbook: paideia-api/paideia-api.yml
+
+- name: paideia offchain repo
+  ansible.builtin.import_playbook: paideia-offchain/paideia-offchain.yml
