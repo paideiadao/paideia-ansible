@@ -1,0 +1,4 @@
+env:
+  ENV_FILE: .env
+  POSTGRES_PORT: 5454
+  REDIS_PORT: 6767

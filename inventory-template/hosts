@@ -1,0 +1,13 @@
+all:
+  children:
+    paideia:
+      children:
+        paideia_offchain:
+          hosts:
+            myserver:
+        paideia_data:
+          hosts:
+            myserver:
+        paideia_api:
+          hosts:
+            myserver:

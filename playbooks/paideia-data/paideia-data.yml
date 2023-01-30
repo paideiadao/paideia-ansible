@@ -1,0 +1,25 @@
+- name: Install and run paideia-data services
+  hosts: paideia_data
+  remote_user: "{{ ssh_user }}"
+
+  tasks:
+  - name: git clone repo for paideia
+    ansible.builtin.git:
+      repo: https://github.com/paideiadao/paideia-data.git
+      dest: /opt/paideia/paideia-data
+      single_branch: yes
+      version: dev
+
+  - name: write .env file
+    ansible.builtin.template:
+      src: ./.env.j2
+      dest: /opt/paideia/paideia-data/.env
+
+  - name: create paideia docker network
+    community.docker.docker_network:
+      name: p-net
+
+  - name: spin up docker containers
+    environment: "{{ env }}"
+    ansible.builtin.docker_compose:
+      project_src: /opt/paideia/paideia-data

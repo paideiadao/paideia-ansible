@@ -1,0 +1,21 @@
+- name: Install and run paideia-offchain services
+  hosts: paideia_offchain
+  remote_user: "{{ ssh_user }}"
+
+  tasks:
+  - name: git clone repo for paideia
+    ansible.builtin.git:
+      repo: https://github.com/paideiadao/paideia-offchain.git
+      dest: /opt/paideia-offchain/{{ project }}
+      single_branch: yes
+      version: main
+
+  - name: write .env file
+    ansible.builtin.template:
+      src: ./.env.j2
+      dest: /opt/paideia-offchain/{{ project }}/.env
+
+  - name: spin up docker containers
+    ansible.builtin.docker_compose:
+      project_src: /opt/paideia-offchain/{{ project }}
+      
