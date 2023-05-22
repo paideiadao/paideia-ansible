@@ -16,3 +16,8 @@
   ansible.builtin.import_playbook: paideia-offchain-template.yml
   vars:
     project: io.ergogames
+
+- name: AHT offchain bots
+  ansible.builtin.import_playbook: paideia-offchain-template.yml
+  vars:
+    project: org.ergoauctions
